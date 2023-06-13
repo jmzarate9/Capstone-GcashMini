@@ -3,7 +3,7 @@ package com.gcash;
 public class Account {
     //Instance Variable
     private String name;
-//    private String number;
+    //    private String number;
     private Double balance;
 
     //Constructor
@@ -30,5 +30,4 @@ public class Account {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
-
 }
