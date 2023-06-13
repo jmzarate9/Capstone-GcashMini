@@ -11,7 +11,8 @@ public class AccountRepositoryTest {
     private AccountRepository accountRepository;
 
     @BeforeEach
-    public void setUp() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
+    void setUp() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
+        System.out.println("Setting up...");
         accountRepository = new AccountRepository();
     }
 
@@ -20,11 +21,16 @@ public class AccountRepositoryTest {
     @DisplayName("Successful User Registration")
     void testUserRegistration() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
 
+        // Register a new user with the given details
         accountRepository.userRegistration("09175861666", "John", 200.0);
 
+        // Retrieve the registered account using the phone number
         Account account = accountRepository.getAccount("09175861666");
+        // Verify if the account is not null
         Assertions.assertNotNull(account);
+        // Verify if the account's name matches the expected value
         Assertions.assertEquals("John", account.getName());
+        // Verify if the account's balance matches the expected value
         Assertions.assertEquals(200.0, account.getBalance(), 0.0);
     }
 
@@ -32,6 +38,8 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of Empty Name ")
     void testRegisterAccountWithEmptyName() {
+
+        //Ensure that an exception of type NameCannotBeEmptyException is raised when the name is empty.
         Assertions.assertThrows(NameCannotBeEmptyException.class, () ->
                 accountRepository.userRegistration("09175861666", "", 100.0));
     }
@@ -40,6 +48,8 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of Invalid Number ")
     void testRegisterAccountWithInvalidNumber() {
+
+        //Ensure that an exception of type NumberMustBeElevenDigitsException is raised when the phoneNumber is greater than 11.
         Assertions.assertThrows(NumberMustBeElevenDigitsException.class, () ->
                 accountRepository.userRegistration("1234567890", "John Doe", 100.0));
     }
@@ -48,6 +58,8 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of Empty Number ")
     void testRegisterAccountWithEmptyNumber() {
+
+        // Ensure that an exception of type NumberCannotBeEmptyException is raised when the phoneNumber is empty.
         Assertions.assertThrows(NumberCannotBeEmptyException.class, () ->
                 accountRepository.userRegistration("", "John Doe", 100.0));
     }
@@ -57,7 +69,11 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of ExistingNumber ")
     void testRegisterAccountWithExistingNumber() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
+
+        // Register a new account with a specific phone number
         accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+
+        // Verify that trying to register an account with an existing phone number throws the expected exception
         Assertions.assertThrows(NumberAlreadyExistsException.class, () ->
                 accountRepository.userRegistration("09175861661", "John Doe", 100.0));
     }
@@ -66,38 +82,84 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Getting Users Account ")
     void testGetAccount() {
+
+        // Get the account with the specified phone number
         Account account = accountRepository.getAccount("09175861661");
+
+        // Verify if the account with a non-existent phone number is null
+        Assertions.assertNull(accountRepository.getAccount("09175861667"), "The account should be null");
+
+        //Verify if the account with the specified phone number is not null
         Assertions.assertNotNull(account);
+        // Verify if the account's name matches the expected value
         Assertions.assertEquals("Bob", account.getName());
-        Assertions.assertEquals(100.0, account.getBalance(), 0.0);
+        // Verify if the account's balance matches the expected value
+        Assertions.assertEquals(100.0, account.getBalance());
 
-        account = accountRepository.getAccount("09175861667");
-        Assertions.assertNull(account);
     }
-
-    // TEST FOR UPDATING THE USER
 
     // TEST FOR DISPLAY ALL
     @Test
-    @DisplayName("Displaying All Accounts")
+    @DisplayName("Successful Displaying All Accounts")
     void testDisplayAll() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
-        // Invoke the displayAll method
+
+        // Register a new account
         accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+
+        // Invoke the displayAll method
         accountRepository.displayAll();
     }
 
     // TEST FOR GETTING THE NUMBER OF ACCOUNTS
     @Test
-    @DisplayName("Get Number of Registered Users")
+    @DisplayName("Successful Getting Number of Registered Users")
     void testGetNumberOfRegisteredUsers() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
             NumberAlreadyExistsException, NameCannotBeEmptyException {
+
+        // Get the initial number of registered users
         int initialNumberOfUsers = accountRepository.getNumberOfRegisteredUsers();
 
         // Register a new account
         accountRepository.userRegistration("09175861666", "John Doe", 100.0);
 
-        // Assertions
+        // Verify the expected value
         Assertions.assertEquals(initialNumberOfUsers + 1, accountRepository.getNumberOfRegisteredUsers());
+    }
+
+    // Test for deleting an account
+    @Test
+    @DisplayName("Successful Account Deletion")
+    void testDeleteAccount() {
+
+        // First, get the initial number of registered users.
+        //Delete the user account
+        int initialCount = accountRepository.getNumberOfRegisteredUsers();
+        accountRepository.deleteAccount("09175861663");
+        // After Deleting, get updated number of registered users.
+        int updatedCount = accountRepository.getNumberOfRegisteredUsers();
+        // Verify if the expected == actual
+        Assertions.assertEquals(initialCount - 1, updatedCount);
+        //Check whether the deleted user account is no longer present in the database
+        Assertions.assertNull(accountRepository.getAccount("09175861663"), "The account must be null");
+
+        accountRepository.displayAll();
+    }
+
+    // Test for deleting all accounts
+    @Test
+    @DisplayName("Successful Deleting All Accounts")
+    void testDeleteAllAccounts() {
+
+        //Delete all account and create a variable named "count" to obtain the total number of registered accounts.
+        accountRepository.deleteAll();
+        int count = accountRepository.getNumberOfRegisteredUsers();
+
+        //Verify the expected value
+        Assertions.assertEquals(0, count);
+
+        //Print and display
+        System.out.println("All accounts deleted successfully.");
+        accountRepository.displayAll();
     }
 
 }
