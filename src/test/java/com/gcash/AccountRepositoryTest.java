@@ -11,14 +11,14 @@ public class AccountRepositoryTest {
     private AccountRepository accountRepository;
 
     @BeforeEach
-    public void setUp() throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
+    public void setUp() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
         accountRepository = new AccountRepository();
     }
 
     // TEST FOR USERS REGISTRATION
     @Test
     @DisplayName("Successful User Registration")
-    void testUserRegistration() throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
+    void testUserRegistration() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
 
         accountRepository.userRegistration("09175861666", "John", 200.0);
 
@@ -32,7 +32,7 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of Empty Name ")
     void testRegisterAccountWithEmptyName() {
-        Assertions.assertThrows(NameCannotBeEmpty.class, () ->
+        Assertions.assertThrows(NameCannotBeEmptyException.class, () ->
                 accountRepository.userRegistration("09175861666", "", 100.0));
     }
 
@@ -40,7 +40,7 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of Invalid Number ")
     void testRegisterAccountWithInvalidNumber() {
-        Assertions.assertThrows(NumberMustBeElevenDigit.class, () ->
+        Assertions.assertThrows(NumberMustBeElevenDigitsException.class, () ->
                 accountRepository.userRegistration("1234567890", "John Doe", 100.0));
     }
 
@@ -48,7 +48,7 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Testing Of Empty Number ")
     void testRegisterAccountWithEmptyNumber() {
-        Assertions.assertThrows(NumberCannotBeEmpty.class, () ->
+        Assertions.assertThrows(NumberCannotBeEmptyException.class, () ->
                 accountRepository.userRegistration("", "John Doe", 100.0));
     }
 
@@ -56,9 +56,9 @@ public class AccountRepositoryTest {
     // TEST FOR REGISTERED ACCOUNT W/ EXISTING NUMBER
     @Test
     @DisplayName("Successful Testing Of ExistingNumber ")
-    void testRegisterAccountWithExistingNumber() throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
+    void testRegisterAccountWithExistingNumber() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
         accountRepository.userRegistration("09175861666", "John Doe", 100.0);
-        Assertions.assertThrows(NumberAlreadyExists.class, () ->
+        Assertions.assertThrows(NumberAlreadyExistsException.class, () ->
                 accountRepository.userRegistration("09175861661", "John Doe", 100.0));
     }
 
@@ -80,7 +80,7 @@ public class AccountRepositoryTest {
     // TEST FOR DISPLAY ALL
     @Test
     @DisplayName("Displaying All Accounts")
-    void testDisplayAll() throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
+    void testDisplayAll() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
         // Invoke the displayAll method
         accountRepository.userRegistration("09175861666", "John Doe", 100.0);
         accountRepository.displayAll();
@@ -89,14 +89,15 @@ public class AccountRepositoryTest {
     // TEST FOR GETTING THE NUMBER OF ACCOUNTS
     @Test
     @DisplayName("Get Number of Registered Users")
-    void testGetNumberOfRegisteredUsers() throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
-        // Set up test data
-        accountRepository.userRegistration("09175861666", "John Doe", 100.0);
-        accountRepository.userRegistration("09175861667", "Jane", 100.0);
+    void testGetNumberOfRegisteredUsers() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
+            NumberAlreadyExistsException, NameCannotBeEmptyException {
+        int initialNumberOfUsers = accountRepository.getNumberOfRegisteredUsers();
 
-        // Call the method and assert the result
-        int numberOfUsers = accountRepository.getNumberOfRegisteredUsers();
-        Assertions.assertEquals(7, numberOfUsers);
+        // Register a new account
+        accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+
+        // Assertions
+        Assertions.assertEquals(initialNumberOfUsers + 1, accountRepository.getNumberOfRegisteredUsers());
     }
 
 }

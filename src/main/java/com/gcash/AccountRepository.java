@@ -20,16 +20,16 @@ public class AccountRepository {
     }
 
     // UsersRegistration
-    public void userRegistration(String phoneNumber, String name, double initialBalance) throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
+    public void userRegistration(String phoneNumber, String name, double initialBalance) throws NumberMustBeElevenDigitsException , NumberCannotBeEmptyException , NumberAlreadyExistsException , NameCannotBeEmptyException {
         if (phoneNumber.isEmpty()) {
-            throw new NumberCannotBeEmpty("Phone number cannot be empty.");
+            throw new NumberCannotBeEmptyException("Phone number cannot be empty.");
         } else if (phoneNumber.length() != 11) {
-            throw new NumberMustBeElevenDigit("Phone number must be eleven digits.");
+            throw new NumberMustBeElevenDigitsException("Phone number must be eleven digits.");
         }else if (accounts.containsKey(phoneNumber)) {
-            throw new NumberAlreadyExists("Phone number already exists.");
+            throw new NumberAlreadyExistsException("Phone number already exists.");
         }
         if (name.isEmpty()) {
-            throw new NameCannotBeEmpty("Name cannot be empty.");
+            throw new NameCannotBeEmptyException("Name cannot be empty.");
         }
 
         Account account = new Account(name, initialBalance);
