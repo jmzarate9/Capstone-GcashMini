@@ -86,4 +86,17 @@ public class AccountRepositoryTest {
         accountRepository.displayAll();
     }
 
+    // TEST FOR GETTING THE NUMBER OF ACCOUNTS
+    @Test
+    @DisplayName("Get Number of Registered Users")
+    void testGetNumberOfRegisteredUsers() throws NumberMustBeElevenDigit, NumberCannotBeEmpty, NumberAlreadyExists, NameCannotBeEmpty {
+        // Set up test data
+        accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+        accountRepository.userRegistration("09175861667", "Jane", 100.0);
+
+        // Call the method and assert the result
+        int numberOfUsers = accountRepository.getNumberOfRegisteredUsers();
+        Assertions.assertEquals(7, numberOfUsers);
+    }
+
 }

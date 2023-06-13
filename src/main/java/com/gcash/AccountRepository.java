@@ -50,5 +50,8 @@ public class AccountRepository {
     }
 
     // Get NumberOfRegisteredUsers
+    public Integer getNumberOfRegisteredUsers() {
+        return accounts.size();
+    }
 
 }
