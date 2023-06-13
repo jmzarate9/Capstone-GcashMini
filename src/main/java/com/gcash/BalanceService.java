@@ -1,4 +1,4 @@
-package org.example;
+package com.gcash;
 
 public class BalanceService {
     private AccountRepository accountRepository;
