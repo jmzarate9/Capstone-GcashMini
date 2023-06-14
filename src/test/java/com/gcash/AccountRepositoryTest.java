@@ -103,6 +103,13 @@ public class AccountRepositoryTest {
                 accountRepository.userRegistration("09175861666", "John Doe", 100.0, "12345"), "The passcode should be invalid.");
     }
 
+    //TEST FOR LOGIN ACCOUNT
+    @Test
+    @DisplayName("Successful Testing of Login Feature")
+    void testLoginDifferentNumberOrPasscode() {
+        Assertions.assertThrows(LoginException.class, () -> accountRepository.logIn("09175861661", "0000"), "The number or MPIN should be different from the initial value.");
+    }
+
     // TEST FOR RETRIEVING ACCOUNT PASSCODE
     @Test
     @DisplayName("Successful Retrieval of Passcode")
@@ -122,6 +129,23 @@ public class AccountRepositoryTest {
 
         // Verify if the retrieved passcode matches the expected value
         Assertions.assertEquals("1234", passcode);
+    }
+
+    // TEST FOR LOGIN ACCOUNT
+    @Test
+    @DisplayName("Login")
+    void testLogIn() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
+            NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException,
+            PasscodeShouldFourDigitsException, LoginException {
+        // Register an account
+        accountRepository.userRegistration("09175861666", "John", 100.0, "0000");
+
+        // Log in with correct phone number and passcode
+        boolean loggedIn = accountRepository.logIn("09175861666", "0000");
+
+        // Verify if the login was successful
+        Assertions.assertTrue(loggedIn);
+
     }
 
     // TEST FOR GETTING THE ACCOUNT

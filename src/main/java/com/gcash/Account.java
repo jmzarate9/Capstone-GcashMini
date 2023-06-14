@@ -5,12 +5,14 @@ public class Account {
     private String name;
     private Double balance;
     private String passcode;
+    private boolean loggedIn;
 
     //Constructor
     public Account(String name, Double balance,  String passcode) {
         this.name = name;
         this.balance = balance;
         this.passcode = passcode;
+        this.loggedIn = false;
     }
 
     //Getter
@@ -26,8 +28,16 @@ public class Account {
         return passcode;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
     //Setter
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 }

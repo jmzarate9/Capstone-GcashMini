@@ -9,7 +9,6 @@ public class BalanceService {
         this.transactionRepository = transactionRepository;
     }
 
-
     public Double getBalance(String phoneNumber) throws AccountNotFoundException {
         Account account = accountRepository.getAccount(phoneNumber);
         if (account != null) {
