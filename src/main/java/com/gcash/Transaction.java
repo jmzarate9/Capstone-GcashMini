@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Transaction {
     private Double amount;
     private TransactionType type;
-    //transactions have two variables: amount transacted, and type of transaction
+    //transactions have three variables: amount transacted, type of transaction, and the recipient (can be another account or a biller)
     private LocalDateTime timestamp;
 
     public Transaction(Double amount, TransactionType type) {
@@ -27,9 +27,9 @@ public class Transaction {
         TRANSFER
     }
 
-    @Override //so the output is readable
-    public String toString() {
-        return type + " transaction of " + amount + " pesos at " + timestamp;
-    }
+//    @Override //so the output is readable
+//    public String toString() {
+//        return type + " transaction of " + amount + " pesos at " + timestamp;
+//    }
 
 }
