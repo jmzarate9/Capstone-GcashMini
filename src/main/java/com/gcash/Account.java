@@ -2,34 +2,28 @@ package com.gcash;
 
 public class Account {
     //Instance Variable
-    private String id;
     private String name;
-    private String number;
     private Double balance;
+    private String passcode;
 
     //Constructor
-    public Account(String id, String name, String number, Double balance) {
-        this.id = id;
+    public Account(String name, Double balance,  String passcode) {
         this.name = name;
-        this.number = number;
         this.balance = balance;
+        this.passcode = passcode;
     }
 
     //Getter
-    public String getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
     public Double getBalance() {
         return balance;
+    }
+
+    public String getPasscode() {
+        return passcode;
     }
 
     //Setter
