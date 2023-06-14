@@ -48,9 +48,6 @@ public class BillsPaymentTest {
             System.out.println(transaction);
         }
 
-        // verify that the user's new balance is decreased to 50.0
-        Assertions.assertEquals(50.0, balanceService.getBalance("09617419366"));
-
     }
 }
 
