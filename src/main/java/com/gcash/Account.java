@@ -3,14 +3,14 @@ package com.gcash;
 public class Account {
     //Instance Variable
     private String name;
-    //    private String number;
     private Double balance;
+    private String passcode;
 
     //Constructor
-    public Account(String name, Double balance) {
+    public Account(String name, Double balance,  String passcode) {
         this.name = name;
-//        this.number = number;
         this.balance = balance;
+        this.passcode = passcode;
     }
 
     //Getter
@@ -18,12 +18,12 @@ public class Account {
         return name;
     }
 
-//    public String getNumber() {
-//        return number;
-//    }
-
     public Double getBalance() {
         return balance;
+    }
+
+    public String getPasscode() {
+        return passcode;
     }
 
     //Setter

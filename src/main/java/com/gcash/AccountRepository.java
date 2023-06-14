@@ -20,15 +20,15 @@ public class AccountRepository {
     private void initializeAccounts() {
 
         // Adds a new account object with the phone number "09175861661", name "Bob", and initial balance 100.0 to the accounts map.
-        accounts.put("09175861661", new Account("Bob", 100.0));
-        accounts.put("09175861662", new Account("Marley", 100.0));
-        accounts.put("09175861663", new Account("Seth", 100.0));
-        accounts.put("09175861664", new Account("Ryan", 100.0));
-        accounts.put("09175861665", new Account("Fritz", 100.0));
+        accounts.put("09175861661", new Account("Bob", 100.0, "1234"));
+        accounts.put("09175861662", new Account("Marley", 100.0, "2345"));
+        accounts.put("09175861663", new Account("Seth", 100.0, "3456"));
+        accounts.put("09175861664", new Account("Ryan", 100.0, "4567"));
+        accounts.put("09175861665", new Account("Fritz", 100.0, "5678"));
     }
 
     // UsersRegistration
-    public void userRegistration(String phoneNumber, String name, double initialBalance) throws NumberMustBeElevenDigitsException , NumberCannotBeEmptyException , NumberAlreadyExistsException , NameCannotBeEmptyException {
+    public void userRegistration(String phoneNumber, String name, double initialBalance, String passcode) throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException, NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException {
 
         // Create conditional statements for validations
         if (phoneNumber.isEmpty()) {
@@ -42,9 +42,15 @@ public class AccountRepository {
         if (name.isEmpty()) {
             throw new NameCannotBeEmptyException("Name cannot be empty.");
         }
+        if (passcode.isEmpty()) {
+            throw new PasscodeCannotBeEmptyException("MPIN cannot be empty.");
+        } else if (passcode.length() != 4) {
+            throw new PasscodeShouldFourDigitsException("MPIN must be four digits.");
+        }
+
 
         // Creates a new Account object with the provided name and initial balance.
-        Account account = new Account(name, initialBalance);
+        Account account = new Account(name, initialBalance, passcode);
         // Adds the newly created account to the accounts map with phoneNumber as the key.
         accounts.put(phoneNumber, account);
     }

@@ -19,10 +19,10 @@ public class AccountRepositoryTest {
     // TEST FOR USERS REGISTRATION
     @Test
     @DisplayName("Successful User Registration")
-    void testUserRegistration() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
+    void testUserRegistration() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException {
 
         // Register a new user with the given details
-        accountRepository.userRegistration("09175861666", "John", 200.0);
+        accountRepository.userRegistration("09175861666", "John", 200.0, "0000");
 
         // Retrieve the registered account using the phone number
         Account account = accountRepository.getAccount("09175861666");
@@ -41,7 +41,7 @@ public class AccountRepositoryTest {
 
         //Ensure that an exception of type NameCannotBeEmptyException is raised when the name is empty.
         Assertions.assertThrows(NameCannotBeEmptyException.class, () ->
-                accountRepository.userRegistration("09175861666", "", 100.0));
+                accountRepository.userRegistration("09175861666", "", 100.0, "0000"), "Name should be empty");
     }
 
     // TEST FOR REGISTERED ACCOUNT W/ INVALID NUMBER
@@ -51,7 +51,7 @@ public class AccountRepositoryTest {
 
         //Ensure that an exception of type NumberMustBeElevenDigitsException is raised when the phoneNumber is greater than 11.
         Assertions.assertThrows(NumberMustBeElevenDigitsException.class, () ->
-                accountRepository.userRegistration("1234567890", "John Doe", 100.0));
+                accountRepository.userRegistration("09175861666000", "John Doe", 100.0, "0000"), "The number should be Invalid or less than 11 digit");
     }
 
     // TEST FOR REGISTERED ACCOUNT W/ EMPTY NUMBER
@@ -61,22 +61,38 @@ public class AccountRepositoryTest {
 
         // Ensure that an exception of type NumberCannotBeEmptyException is raised when the phoneNumber is empty.
         Assertions.assertThrows(NumberCannotBeEmptyException.class, () ->
-                accountRepository.userRegistration("", "John Doe", 100.0));
+                accountRepository.userRegistration("", "John Doe", 100.0, "0000"), "The number should be Empty.");
     }
 
 
     // TEST FOR REGISTERED ACCOUNT W/ EXISTING NUMBER
     @Test
     @DisplayName("Successful Testing Of ExistingNumber ")
-    void testRegisterAccountWithExistingNumber() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
-
-        // Register a new account with a specific phone number
-        accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+    void testRegisterAccountWithExistingNumber() {
 
         // Verify that trying to register an account with an existing phone number throws the expected exception
         Assertions.assertThrows(NumberAlreadyExistsException.class, () ->
-                accountRepository.userRegistration("09175861661", "John Doe", 100.0));
+                accountRepository.userRegistration("09175861661", "John Doe", 100.0, "0000"), "The number should be existing.");
     }
+
+    // TEST FOR USER REGISTRATION W/ EMPTY PASSCODE
+    @Test
+    @DisplayName("Successful Testing of Empty MPIN")
+    void testEmptyPasscode() {
+
+        // Verify the exception
+        Assertions.assertThrows(PasscodeCannotBeEmptyException.class, () -> accountRepository.userRegistration("09175861669", "John Doe", 100.0, ""), "The MPIN / Passcode should be Empty");
+    }
+
+    // TEST FOR USER REGISTRATION W/ LESS THAN 4 DIGIT PASSCODE
+    @Test
+    @DisplayName("Successful Testing of Less than 4 digit MPIN")
+    void testLessThanFourDigitPasscode() {
+
+        // Verify the exception
+        Assertions.assertThrows(PasscodeShouldFourDigitsException.class, () -> accountRepository.userRegistration("09175861669", "John Doe", 100.0, "12"), "The MPIN / Passcode should be less than 4 digit");
+    }
+
 
     // TEST FOR GETTING THE ACCOUNT
     @Test
@@ -122,10 +138,10 @@ public class AccountRepositoryTest {
     // TEST FOR DISPLAY ALL
     @Test
     @DisplayName("Successful Displaying All Accounts")
-    void testDisplayAll() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException {
+    void testDisplayAll() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException {
 
         // Register a new account
-        accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+        accountRepository.userRegistration("09175861666", "John Doe", 100.0, "0000");
 
         // Invoke the displayAll method
         accountRepository.displayAll();
@@ -135,13 +151,13 @@ public class AccountRepositoryTest {
     @Test
     @DisplayName("Successful Getting Number of Registered Users")
     void testGetNumberOfRegisteredUsers() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
-            NumberAlreadyExistsException, NameCannotBeEmptyException {
+            NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException {
 
         // Get the initial number of registered users
         int initialNumberOfUsers = accountRepository.getNumberOfRegisteredUsers();
 
         // Register a new account
-        accountRepository.userRegistration("09175861666", "John Doe", 100.0);
+        accountRepository.userRegistration("09175861666", "John Doe", 100.0, "0000");
 
         // Verify the expected value
         Assertions.assertEquals(initialNumberOfUsers + 1, accountRepository.getNumberOfRegisteredUsers());
