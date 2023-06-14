@@ -56,19 +56,19 @@ public class AccountRepository {
     }
 
     // Get Account
-        // This method retrieves the account associated with the specified phone number.
+    // This method retrieves the account associated with the specified phone number.
     public Account getAccount(String phoneNumber) {
         return accounts.get(phoneNumber);
     }
 
     // Search Account
-        // This method search for the user account using phoneNumber
+    // This method search for the user account using phoneNumber
     public Account searchAccount(String phoneNumber) {
         return accounts.get(phoneNumber);
     }
 
     // Display Account
-        // This method displays all the registered accounts by iterating over the account HashMap and printing the phone number, name, and balance of each account.
+    // This method displays all the registered accounts by iterating over the account HashMap and printing the phone number, name, and balance of each account.
     public void displayAll() {
         for (String phoneNumber : accounts.keySet()) {
             Account account = accounts.get(phoneNumber);
@@ -77,22 +77,20 @@ public class AccountRepository {
     }
 
     // Get NumberOfRegisteredUsers
-        //  This method returns the total number of registered users by returning the size of the accounts HashMap.
+    //  This method returns the total number of registered users by returning the size of the accounts HashMap.
     public Integer getNumberOfRegisteredUsers() {
         return accounts.size();
     }
 
     // Delete Account
-        // This method is responsible for deleting a specific account.
+    // This method is responsible for deleting a specific account.
     public void deleteAccount(String phoneNumber) {
         accounts.remove(phoneNumber);
     }
 
     // Delete All Accounts
-        // This method is responsible for deleting all accounts.
+    // This method is responsible for deleting all accounts.
     public void deleteAll() {
         accounts.clear();
     }
-
-
 }
