@@ -47,17 +47,4 @@ public class TransactionRepository {
         return filteredTransactions;
     }
 
-
-
-    public List<Transaction> getTransactionsByUser(TransactionRepository transactionRepository, AccountRepository accountRepository, String searchName) {
-        List<Transaction> filteredTransactions = new ArrayList<>();
-
-        for (String id : transactionHistory.keySet()) {
-            if (accountRepository.getAccount(id).getName().equals(searchName)) {
-                filteredTransactions.addAll(transactionHistory.get(id));
-            }
-        }
-        return filteredTransactions;
-    }
-
 }
