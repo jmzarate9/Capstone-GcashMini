@@ -27,8 +27,8 @@ public class GForest {
         } else {
             // throw exception
             System.out.println("Not enough energy to plant a tree. Your current balance is " + this.energy + " energy.");
+            return false;
         }
-        return false;
     }
 
     public void updateEnergy(TransactionRepository transactionRepository) {

@@ -39,6 +39,9 @@ public class GForestTest {
         gForest.updateEnergy(transactionRepository);
         Assertions.assertEquals(150, gForest.getEnergy());
 
+        // verify that the plantATree method does not go through if the energy is insufficient
+        Assertions.assertFalse(gForest.plantATree(transactionRepository));
+
         // run the payBill method 15 times
         for (int i = 0; i < 15; i++) {
             billsPayment.payBill("09617419366", "Meralco", 1.0);
@@ -53,9 +56,6 @@ public class GForestTest {
 
         // verify that the remaining balance is 900
         Assertions.assertEquals(900, gForest.getEnergy());
-
-
-
 
 
     }
