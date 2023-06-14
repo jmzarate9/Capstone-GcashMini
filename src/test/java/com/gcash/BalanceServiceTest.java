@@ -12,13 +12,13 @@ public class BalanceServiceTest {
 
     AccountRepository repository;
     BalanceService balanceService;
-
     TransactionRepository transactionRepository;
 
     @BeforeEach
     void setup(){
         System.out.println("Setting up...");
         repository = new AccountRepository();
+        transactionRepository = new TransactionRepository();
         balanceService = new BalanceService(repository, transactionRepository);
 
     }
