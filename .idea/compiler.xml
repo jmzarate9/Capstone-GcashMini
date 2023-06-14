@@ -9,8 +9,5 @@
         <module name="apper-junit-zarate" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="apper-junit-zarate" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
