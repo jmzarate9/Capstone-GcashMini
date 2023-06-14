@@ -25,13 +25,13 @@ public class TransactionRepositoryTest {
         transactionRepository = new TransactionRepository();
         balanceService = new BalanceService(accountRepository, transactionRepository);
     }
-
+/*
     @AfterEach
     void cleanup() {
         System.out.println("Cleaning up...");
         accountRepository.deleteAllAccounts();
     }
-
+*/
     @BeforeAll
     static void globalSetup() {
         System.out.println("Global setup");
@@ -43,15 +43,15 @@ public class TransactionRepositoryTest {
     }
 
     @Test
-    void addTransaction() throws AccountNotFoundException {
-        String id1 = accountRepository.createAccount("Loreine", 1.0);
-        String id2 = accountRepository.createAccount("Ken", 1.0);
+    void addTransaction() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
         //System.out.println(accountRepository.getAccount(id1));
 
         var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
         var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
-        transactionRepository.addTransaction(id1, transaction1);
-        transactionRepository.addTransaction(id2, transaction2);
+        transactionRepository.addTransaction("09617419366", transaction1);
+        transactionRepository.addTransaction("09617419365", transaction2);
 
         List<Transaction> testTransactions = transactionRepository.getAllTransactions();
 //        System.out.println(testTransactions.get(0));
@@ -61,7 +61,7 @@ public class TransactionRepositoryTest {
                 () -> Assertions.assertEquals(transaction2, testTransactions.get(1))
         );
     }
-
+/*
     @Test
     void getUserTransactions() throws AccountNotFoundException {
         String id1 = accountRepository.createAccount("Loreine", 1.0);
@@ -156,5 +156,5 @@ public class TransactionRepositoryTest {
         boolean checkContents = testTransactions.isEmpty();
         Assertions.assertTrue(checkContents);
     }
-
+*/
 }

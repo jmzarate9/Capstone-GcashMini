@@ -2,10 +2,11 @@ package com.gcash;
 
 public class BalanceService {
     private AccountRepository accountRepository;
+    private final TransactionRepository transactionRepository;
 
-
-    public BalanceService(AccountRepository accountRepository) {
+    public BalanceService(AccountRepository accountRepository, TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
     }
 
 
@@ -13,6 +14,7 @@ public class BalanceService {
         Account account = accountRepository.getAccount(phoneNumber);
         if (account != null) {
             return account.getBalance();
+
         } else {
             throw new AccountNotFoundException("Account " + phoneNumber + " not found");
         }
@@ -22,6 +24,8 @@ public class BalanceService {
         Account account = accountRepository.getAccount(phoneNumber);
         if (account != null) {
             account.setBalance(account.getBalance()+amount);
+            var newCreditTransaction = new Transaction(amount, Transaction.TransactionType.CREDIT);
+            transactionRepository.addTransaction(phoneNumber, newCreditTransaction);
         } else {
             throw new AccountNotFoundException("Account " + phoneNumber + "not found");
         }
@@ -34,6 +38,8 @@ public class BalanceService {
                 throw new InsufficientBalanceException("Insufficient Balance");
             }
             account.setBalance(account.getBalance()-amount);
+            var newDebitTransaction = new Transaction(amount, Transaction.TransactionType.DEBIT);
+            transactionRepository.addTransaction(phoneNumber, newDebitTransaction);
         } else {
             throw new AccountNotFoundException("Account " + phoneNumber + "not found");
         }

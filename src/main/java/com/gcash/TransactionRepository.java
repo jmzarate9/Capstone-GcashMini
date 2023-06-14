@@ -17,12 +17,12 @@ public class TransactionRepository {
         //putIfAbsent and put are different
         transactionHistory.get(id).add(transaction);
     }
-
+/*
     public List<Transaction> getUserTransactions(String id) {
         return transactionHistory.getOrDefault(id, new ArrayList<>());
         //so if it checks the id and wala siya sa transactionHistory, you return a blank list
     }
-
+*/
     public List<Transaction> getAllTransactions() {
         List<Transaction> allTransactions = new ArrayList<>();
         for (List<Transaction> transactions : transactionHistory.values()) {
@@ -31,7 +31,7 @@ public class TransactionRepository {
         return allTransactions;
         //rather than directly return transactionHistory, for encapsulation, just iterate through all entries and add to a separate list
     }
-
+/*
     public List<Transaction> getTransactionsByType(TransactionRepository transactionRepository, Transaction.TransactionType type) {
         List<Transaction> filteredTransactions = new ArrayList<>();
         for (List<Transaction> transactions : transactionHistory.values()) {
@@ -47,6 +47,8 @@ public class TransactionRepository {
         return filteredTransactions;
     }
 
+ */
+/*
     public List<Transaction> getTransactionsByUser(TransactionRepository transactionRepository, AccountRepository accountRepository, String searchName) {
         List<Transaction> filteredTransactions = new ArrayList<>();
 
@@ -57,4 +59,6 @@ public class TransactionRepository {
         }
         return filteredTransactions;
     }
+
+ */
 }
