@@ -9,45 +9,45 @@ public class BalanceService {
     }
 
 
-    public Double getBalance(String accountId) throws AccountNotFoundException {
-        Account account = accountRepository.getAccount(accountId);
+    public Double getBalance(String phoneNumber) throws AccountNotFoundException {
+        Account account = accountRepository.getAccount(phoneNumber);
         if (account != null) {
-            return account.balance();
+            return account.getBalance();
         } else {
-            throw new AccountNotFoundException("Account " + accountId + " not found");
+            throw new AccountNotFoundException("Account " + phoneNumber + " not found");
         }
     }
 
-    public void credit(String accountId, Double amount) throws AccountNotFoundException{
-        Account account = accountRepository.getAccount(accountId);
+    public void credit(String phoneNumber, Double amount) throws AccountNotFoundException{
+        Account account = accountRepository.getAccount(phoneNumber);
         if (account != null) {
-            account.setBalance(account.balance()+amount);
+            account.setBalance(account.getBalance()+amount);
         } else {
-            throw new AccountNotFoundException("Account " + accountId + "not found");
+            throw new AccountNotFoundException("Account " + phoneNumber + "not found");
         }
     }
 
-    public void debit(String accountId, Double amount) throws InsufficientBalanceException, AccountNotFoundException {
-        Account account = accountRepository.getAccount(accountId);
+    public void debit(String phoneNumber, Double amount) throws InsufficientBalanceException, AccountNotFoundException {
+        Account account = accountRepository.getAccount(phoneNumber);
         if (account != null) {
-            if (account.balance()<amount){
-                throw new InsufficientBalanceException("Insufficient Balance, please try again");
+            if (account.getBalance()<amount){
+                throw new InsufficientBalanceException("Insufficient Balance");
             }
-            account.setBalance(account.balance()-amount);
+            account.setBalance(account.getBalance()-amount);
         } else {
-            throw new AccountNotFoundException("Account " + accountId + "not found");
+            throw new AccountNotFoundException("Account " + phoneNumber + "not found");
         }
     }
 
-    public void transfer(String senderAccountId, String receiverAccountId, Double amount) throws InsufficientBalanceException, AccountNotFoundException {
-        Account senderAccount = accountRepository.getAccount(senderAccountId);
-        Account receiverAccount = accountRepository.getAccount(receiverAccountId);
+    public void transfer(String senderPhoneNumber, String receiverPhoneNumber, Double amount) throws InsufficientBalanceException, AccountNotFoundException {
+        Account senderAccount = accountRepository.getAccount(senderPhoneNumber);
+        Account receiverAccount = accountRepository.getAccount(receiverPhoneNumber);
         if (senderAccount != null && receiverAccount != null) {
-            if(senderAccount.balance()>=amount){
-            debit(senderAccountId,amount);
-            credit(receiverAccountId, amount);}
-            else {
+            if(senderAccount.getBalance()<amount)
                 throw new InsufficientBalanceException("Insufficient Sender Balance");
+            else {
+                    debit(senderPhoneNumber,amount);
+                    credit(receiverPhoneNumber, amount);
             }
         } else {
             throw new AccountNotFoundException("Account " + "not found");
