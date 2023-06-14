@@ -1,7 +1,5 @@
 package com.gcash;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,21 +24,10 @@ public class TransactionRepositoryTest {
         transactionRepository = new TransactionRepository();
         balanceService = new BalanceService(accountRepository, transactionRepository);
     }
-    /*
-        @AfterEach
-        void cleanup() {
-            System.out.println("Cleaning up...");
-            accountRepository.deleteAllAccounts();
-        }
-    */
+
     @BeforeAll
     static void globalSetup() {
         System.out.println("Global setup");
-    }
-
-    @AfterAll
-    static void globalCleaning() {
-        System.out.println("Global cleaning");
     }
 
     @Test
