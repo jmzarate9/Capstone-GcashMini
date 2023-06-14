@@ -19,11 +19,14 @@ public class BalanceServiceTest {
         repository = new AccountRepository();
         balanceService = new BalanceService(repository);
     }
+    /*
     @AfterEach
     void cleanup() {
         System.out.println("Cleaning up...");
         repository.deleteAllAccounts();
     }
+
+     */
 
     @BeforeAll
     static void globalSetup() {
@@ -37,86 +40,85 @@ public class BalanceServiceTest {
 
     @Test
     void setBalanceTest() {
-        Account account = new Account("1", "Orvyl", 100.0);
+        Account account = new Account("Orvyl", 100.0, "0000");
         account.setBalance(150.0);
-        Assertions.assertEquals(150.0, account.balance());
+        Assertions.assertEquals(150.0, account.getBalance());
     }
 
     @Test
-    void getBalanceTest() throws AccountNotFoundException{
-        String accountId = repository.createAccount("Orvyl", 89.9);
-        Assertions.assertEquals(89.9, balanceService.getBalance(accountId));
+    void getBalanceTest() throws AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",100.0, "0000");
+        Assertions.assertEquals(100.0, balanceService.getBalance("09617419366"));
     }
 
     @Test
-    void getBalanceNonExistentAccountTest() {
-        double initialBalance = 100.0;
-        repository.createAccount("Orvyl", initialBalance);
+    void getBalanceNonExistentAccountTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.getBalance("random id"));
     }
 
     @Test
-    void creditTest() throws  AccountNotFoundException {
-        String accountId = repository.createAccount("Orvyl", 50.0);
-        balanceService.credit(accountId, 100.0);
-        Double balance = balanceService.getBalance(accountId);
+    void creditTest() throws AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",50.0, "0000");
+        balanceService.credit("09617419366", 100.0);
+        Double balance = balanceService.getBalance("09617419366");
         Assertions.assertEquals(150.0, balance);
     }
 
     @Test
-    void debitTest() throws InsufficientBalanceException, AccountNotFoundException {
-        String accountId = repository.createAccount("Orvyl", 150.0);
-        balanceService.debit(accountId, 100.0);
-        Double balance = balanceService.getBalance(accountId);
+    void debitTest() throws InsufficientBalanceException, AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",150.0, "0000");
+        balanceService.debit("09617419366", 100.0);
+        Double balance = balanceService.getBalance("09617419366");
         Assertions.assertEquals(50.0, balance);
     }
 
     @Test
-    void transferToAndFromTest() throws InsufficientBalanceException, AccountNotFoundException {
-        String senderAccountId = repository.createAccount("Orvyl", 150.0);
-        String receiverAccountId = repository.createAccount("Siglo", 100.0);
-        balanceService.transfer(senderAccountId, receiverAccountId, 50.0);
-        Double senderBalance = balanceService.getBalance(senderAccountId);
-        Double receiverBalance = balanceService.getBalance(receiverAccountId);
+    void transferToAndFromTest() throws InsufficientBalanceException, AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",150.0, "0000");
+        repository.userRegistration("09617419361", "Orvyl2",100.0, "0000");
+        balanceService.transfer("09617419366", "09617419361", 50.0);
+        Double senderBalance = balanceService.getBalance("09617419366");
+        Double receiverBalance = balanceService.getBalance("09617419361");
         Assertions.assertEquals(100.0, senderBalance);
         Assertions.assertEquals(150.0, receiverBalance);
     }
 
 
     @Test
-    void debitAccountNotFoundTest()  {
-        String accountId = repository.createAccount("Orvyl", 150.0);
+    void debitAccountNotFoundTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         double deductedAmount = 1000.0;
         Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.debit("random id", deductedAmount));
     }
     @Test
-    void insufficientBalanceTest()  {
-        String accountId = repository.createAccount("Orvyl", 150.0);
-        double debitedAmount = 1000;
-        Assertions.assertThrows(InsufficientBalanceException.class, () -> balanceService.debit(accountId, debitedAmount));
+    void insufficientBalanceTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        double debitedAmount = 1000.0;
+        Assertions.assertThrows(InsufficientBalanceException.class, () -> balanceService.debit("09617419366", debitedAmount));
     }
 
     @Test
-    void creditAccountNotFoundTest()  {
-        String accountId = repository.createAccount("Orvyl", 150.0);
+    void creditAccountNotFoundTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         double addedAmount = 1000;
         Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.credit("random id", addedAmount));
     }
 
     @Test
-    void insufficientTransferSenderTest()  {
-        String receiverAccountId = repository.createAccount("Siglo", 100.0);
-        String senderAccountId = repository.createAccount("Orvyl", 0.0);
-        double amount = 50;
-        Assertions.assertThrows(InsufficientBalanceException.class, () -> balanceService.transfer( senderAccountId, receiverAccountId, amount));
+    void insufficientTransferSenderTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",49.0, "0000");
+        repository.userRegistration("09617419361", "Orvyl2",150.0, "0000");
+        Assertions.assertThrows(InsufficientBalanceException.class, () -> balanceService.transfer( "09617419366", "09617419361", 50.0));
     }
 
     @Test
-    void accountNotFoundTest()  {
-        String receiverAccountId = repository.createAccount("Siglo", 100.0);
-        String senderAccountId = repository.createAccount("Orvyl", 0.0);
+    void accountTransferNotFoundTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        repository.userRegistration("09617419361", "Orvyl2",0.0, "0000");
         double amount = 50;
-        Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.transfer( "siglo", receiverAccountId, amount));
+        Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.transfer( "siglo", "Corvyl", amount));
     }
-
 }
+
+
