@@ -39,6 +39,9 @@ public class GForestTest {
         gForest.updateEnergy(transactionRepository);
         Assertions.assertEquals(150, gForest.getEnergy());
 
+        // verify that running the plantATree method returns false
+        Assertions.assertFalse(gForest.plantATree(transactionRepository));
+
         // run the payBill method 15 times
         for (int i = 0; i < 15; i++) {
             billsPayment.payBill("09617419366", "Meralco", 1.0);

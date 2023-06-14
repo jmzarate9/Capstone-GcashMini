@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9456cea7-5728-4647-84aa-3228f6c89bc7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/target/classes/com/gcash/BalanceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gcash/BalanceService.class" afterDir="false" />
+    <list default="true" id="30a610a4-dd6c-4f89-8e5f-ed5369974028" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gcash/newfeatures/GForest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gcash/newfeatures/GForest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gcash/newfeatures/GForestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gcash/newfeatures/GForestTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,11 +17,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="TestBranch" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -26,149 +25,51 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="useMavenOutput" value="false" />
-      </MavenImportingSettings>
-    </option>
   </component>
-  <component name="ProjectId" id="2RBjb9Gfwv1foGxqYmvaKJjC3gm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2RCq62D9OldLJiQq2CoQOWvYeXK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/siglo/Capstone-GcashMini&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "TestBranchV2",
+    "last_opened_file_path": "/Users/serafinwork/Desktop/Capstone-GcashMini"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.gcash" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.gcash in apper-junit-zarate">
-    <configuration name="All in apper-junit-zarate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager">
+    <configuration name="GForestTest.plantATree" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="apper-junit-zarate" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="gcash in apper-junit-zarate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="apper-junit-zarate" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/gcash" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="java in apper-junit-zarate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="apper-junit-zarate" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="newfeatures in apper-junit-zarate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="apper-junit-zarate" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/gcash/newfeatures" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gcash.newfeatures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gcash.newfeatures" />
+      <option name="MAIN_CLASS_NAME" value="com.gcash.newfeatures.GForestTest" />
+      <option name="METHOD_NAME" value="plantATree" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.gcash in apper-junit-zarate" />
-        <item itemvalue="JUnit.newfeatures in apper-junit-zarate" />
-        <item itemvalue="JUnit.java in apper-junit-zarate" />
-        <item itemvalue="JUnit.All in apper-junit-zarate" />
+        <item itemvalue="JUnit.GForestTest.plantATree" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9456cea7-5728-4647-84aa-3228f6c89bc7" name="Changes" comment="" />
-      <created>1686730437572</created>
+      <changelist id="30a610a4-dd6c-4f89-8e5f-ed5369974028" name="Changes" comment="" />
+      <created>1686764232248</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686730437572</updated>
+      <updated>1686764232248</updated>
     </task>
-    <task id="LOCAL-00001" summary="TestPush">
-      <created>1686731072777</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1686731072777</updated>
-    </task>
-    <task id="LOCAL-00002" summary="TestPush v2 with Transaction">
-      <created>1686732803706</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1686732803706</updated>
-    </task>
-    <task id="LOCAL-00003" summary="TestPush v3 with Transaction">
-      <created>1686733667660</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1686733667660</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Test push with updated BalanceServiceTest">
-      <created>1686750300838</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1686750300838</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Test push with updated BalanceServiceTest">
-      <created>1686750567249</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1686750567249</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Updated and cleanup for BalanceServiceTest and TransactionRepositoryTest">
-      <created>1686755982944</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1686755982944</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="TestPush" />
-    <MESSAGE value="TestPush v2 with Transaction" />
-    <MESSAGE value="TestPush v3 with Transaction" />
-    <MESSAGE value="Test push with updated BalanceServiceTest" />
-    <MESSAGE value="Updated and cleanup for BalanceServiceTest and TransactionRepositoryTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated and cleanup for BalanceServiceTest and TransactionRepositoryTest" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Capstone_GcashMini$All_in_apper_junit_zarate.ic" NAME="All in apper-junit-zarate Coverage Results" MODIFIED="1686730983433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Capstone_GcashMini$gcash_in_apper_junit_zarate.ic" NAME="gcash in apper-junit-zarate Coverage Results" MODIFIED="1686761215659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Capstone_GcashMini$java_in_apper_junit_zarate.ic" NAME="java in apper-junit-zarate Coverage Results" MODIFIED="1686732991121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Capstone_GcashMini$newfeatures_in_apper_junit_zarate.ic" NAME="newfeatures in apper-junit-zarate Coverage Results" MODIFIED="1686761204914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
