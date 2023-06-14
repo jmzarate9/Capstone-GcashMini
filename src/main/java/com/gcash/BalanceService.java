@@ -26,7 +26,8 @@ public class BalanceService {
             account.setBalance(account.getBalance()+amount);
             var newCreditTransaction = new Transaction(amount, Transaction.TransactionType.CREDIT);
             transactionRepository.addTransaction(phoneNumber, newCreditTransaction);
-        } else {
+        }
+        else {
             throw new AccountNotFoundException("Account " + phoneNumber + "not found");
         }
     }
@@ -40,7 +41,8 @@ public class BalanceService {
             account.setBalance(account.getBalance()-amount);
             var newDebitTransaction = new Transaction(amount, Transaction.TransactionType.DEBIT);
             transactionRepository.addTransaction(phoneNumber, newDebitTransaction);
-        } else {
+        }
+        else {
             throw new AccountNotFoundException("Account " + phoneNumber + "not found");
         }
     }

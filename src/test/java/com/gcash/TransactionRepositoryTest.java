@@ -61,41 +61,42 @@ public class TransactionRepositoryTest {
                 () -> Assertions.assertEquals(transaction2, testTransactions.get(1))
         );
     }
-/*
+
     @Test
-    void getUserTransactions() throws AccountNotFoundException {
-        String id1 = accountRepository.createAccount("Loreine", 1.0);
-        String id2 = accountRepository.createAccount("Ken", 1.0);
+    void getUserTransactions() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
+
 
         var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
         var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
         var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
 
-        transactionRepository.addTransaction(id1, transaction1);
-        transactionRepository.addTransaction(id2, transaction2);
-        transactionRepository.addTransaction(id1, transaction3);
+        transactionRepository.addTransaction("09617419366", transaction1);
+        transactionRepository.addTransaction("09617419365", transaction2);
+        transactionRepository.addTransaction("09617419366", transaction3);
 
 //        System.out.println(transactionRepository.getUserTransactions(id1));
 //        System.out.println(transactionRepository.getUserTransactions(id2));
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, transactionRepository.getUserTransactions(id2).size()),
-                () -> Assertions.assertEquals(2, transactionRepository.getUserTransactions(id1).size())
+                () -> Assertions.assertEquals(1, transactionRepository.getUserTransactions("09617419366").size()),
+                () -> Assertions.assertEquals(2, transactionRepository.getUserTransactions("09617419365").size())
         );
     }
 
     @Test
-    void getAllTransactions() throws AccountNotFoundException {
-        String id1 = accountRepository.createAccount("Loreine", 1.0);
-        String id2 = accountRepository.createAccount("Ken", 1.0);
+    void getAllTransactions() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
 
         var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
         var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
         var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
 
-        transactionRepository.addTransaction(id1, transaction1);
-        transactionRepository.addTransaction(id2, transaction2);
-        transactionRepository.addTransaction(id1, transaction3);
+        transactionRepository.addTransaction("09617419366", transaction1);
+        transactionRepository.addTransaction("09617419365", transaction2);
+        transactionRepository.addTransaction("09617419366", transaction3);
 
 //        System.out.println(transactionRepository.getUserTransactions(id1));
 //        System.out.println(transactionRepository.getUserTransactions(id2));
@@ -105,17 +106,17 @@ public class TransactionRepositoryTest {
     }
 
     @Test
-    void getTransactionsByType() throws AccountNotFoundException {
-        String id1 = accountRepository.createAccount("Loreine", 1.0);
-        String id2 = accountRepository.createAccount("Ken", 1.0);
+    void getTransactionsByType() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
 
         var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
         var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
         var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
 
-        transactionRepository.addTransaction(id1, transaction1);
-        transactionRepository.addTransaction(id2, transaction2);
-        transactionRepository.addTransaction(id1, transaction3);
+        transactionRepository.addTransaction("09617419366", transaction1);
+        transactionRepository.addTransaction("09617419365", transaction2);
+        transactionRepository.addTransaction("09617419366", transaction3);
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, transactionRepository.getTransactionsByType(transactionRepository, Transaction.TransactionType.DEBIT).size()),
@@ -125,17 +126,17 @@ public class TransactionRepositoryTest {
     }
 
     @Test
-    void getTransactionsByUser() throws AccountNotFoundException {
-        String id1 = accountRepository.createAccount("Loreine", 1.0);
-        String id2 = accountRepository.createAccount("Ken", 1.0);
+    void getTransactionsByUser() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
+        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
 
         var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
         var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
         var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
 
-        transactionRepository.addTransaction(id1, transaction1);
-        transactionRepository.addTransaction(id2, transaction2);
-        transactionRepository.addTransaction(id1, transaction3);
+        transactionRepository.addTransaction("09617419366", transaction1);
+        transactionRepository.addTransaction("09617419365", transaction2);
+        transactionRepository.addTransaction("09617419366", transaction3);
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(2, transactionRepository.getTransactionsByUser(transactionRepository, accountRepository, "Loreine").size()),
@@ -144,17 +145,17 @@ public class TransactionRepositoryTest {
     }
 
     @Test
-    void noUserTransactionsToGet() {
-        String id = accountRepository.createAccount("Loreine", 1.0);
-        boolean checkContents = transactionRepository.getUserTransactions(id).isEmpty();
+    void noUserTransactionsToGet() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException{
+        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
+        boolean checkContents = transactionRepository.getUserTransactions("09617419366").isEmpty();
         Assertions.assertTrue(checkContents);
     }
 
     @Test
-    void noTransactionsAtAll() {
+    void noTransactionsAtAll() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException{
         List<Transaction> testTransactions = transactionRepository.getAllTransactions();
         boolean checkContents = testTransactions.isEmpty();
         Assertions.assertTrue(checkContents);
     }
-*/
+
 }
