@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -43,6 +44,7 @@ public class TransactionRepositoryTest {
     }
 
     @Test
+    @DisplayName("Successful Testing Of Add Transaction ")
     void addTransaction() throws NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
 //        Setup new accounts to be used for transaction
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
@@ -68,6 +70,7 @@ public class TransactionRepositoryTest {
     }
 
     @Test
+    @DisplayName("Successful Testing Of Get User Transactions ")
     void getUserTransactions() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
 //        Setup new accounts to be used for transaction
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
@@ -91,6 +94,7 @@ public class TransactionRepositoryTest {
     }
 
     @Test
+    @DisplayName("Successful Testing Of Get All Transactions ")
     void getAllTransactions() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
 //        Setup new accounts to be used for transactions
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
@@ -117,6 +121,7 @@ public class TransactionRepositoryTest {
     }
 
     @Test
+    @DisplayName("Successful Testing Of Get Transaction By Type ")
     void getTransactionsByType() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
 //        Setup new accounts to be used for transactions
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
@@ -141,6 +146,7 @@ public class TransactionRepositoryTest {
 
 
     @Test
+    @DisplayName("Unsuccessful Transaction Get If User Has No Transactions ")
     void noUserTransactionsToGet() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException{
 //        Setup new account to be used for transaction
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
@@ -153,6 +159,7 @@ public class TransactionRepositoryTest {
     }
 
     @Test
+    @DisplayName("Unsuccessful Transaction Get If No Transactions ")
     void noTransactionsAtAll() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException{
 //        Call getAllTransactions and store the transactions in List TestTransactions
         List<Transaction> testTransactions = transactionRepository.getAllTransactions();
