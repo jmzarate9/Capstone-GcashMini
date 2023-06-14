@@ -93,6 +93,36 @@ public class AccountRepositoryTest {
         Assertions.assertThrows(PasscodeShouldFourDigitsException.class, () -> accountRepository.userRegistration("09175861669", "John Doe", 100.0, "12"), "The MPIN / Passcode should be less than 4 digit");
     }
 
+    // TEST FOR USER REGISTRATION W/ INVALID PASSCODE
+    @Test
+    @DisplayName("Successful Testing of Invalid MPIN")
+    void testInvalidPasscode() {
+
+        // Ensure that an exception of type PasscodeShouldFourDigitsException is raised when the passcode is not four digits.
+        Assertions.assertThrows(PasscodeShouldFourDigitsException.class, () ->
+                accountRepository.userRegistration("09175861666", "John Doe", 100.0, "12345"), "The passcode should be invalid.");
+    }
+
+    // TEST FOR RETRIEVING ACCOUNT PASSCODE
+    @Test
+    @DisplayName("Successful Retrieval of Passcode")
+    void testGetPasscode() {
+        // Register a new account with a passcode
+        try {
+            accountRepository.userRegistration("09175861666", "John Doe", 100.0, "1234");
+        } catch (Exception e) {
+            // Handle exceptions if necessary
+        }
+
+        // Retrieve the account from the repository
+        Account account = accountRepository.getAccount("09175861666");
+
+        // Retrieve the passcode using the getPasscode() method
+        String passcode = account.getPasscode();
+
+        // Verify if the retrieved passcode matches the expected value
+        Assertions.assertEquals("1234", passcode);
+    }
 
     // TEST FOR GETTING THE ACCOUNT
     @Test
