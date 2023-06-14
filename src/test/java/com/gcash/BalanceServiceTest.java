@@ -1,11 +1,11 @@
 package com.gcash;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 
 
 public class BalanceServiceTest {
@@ -42,6 +42,7 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Balance Set ")
     void setBalanceTest() {
         Account account = new Account("Orvyl", 100.0, "0000");
         account.setBalance(150.0);
@@ -49,18 +50,21 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Balance Get ")
     void getBalanceTest() throws AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",100.0, "0000");
         Assertions.assertEquals(100.0, balanceService.getBalance("09617419366"));
     }
 
     @Test
+    @DisplayName("Account Non Existent ")
     void getBalanceNonExistentAccountTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.getBalance("random id"));
     }
 
     @Test
+    @DisplayName("Amount Credited ")
     void creditTest() throws AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",50.0, "0000");
         balanceService.credit("09617419366", 100.0);
@@ -69,6 +73,7 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Amount Debited ")
     void debitTest() throws InsufficientBalanceException, AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",150.0, "0000");
         balanceService.debit("09617419366", 100.0);
@@ -77,6 +82,7 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Transfer Success")
     void transferToAndFromTest() throws InsufficientBalanceException, AccountNotFoundException,  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",150.0, "0000");
         repository.userRegistration("09617419361", "Orvyl2",100.0, "0000");
@@ -89,12 +95,14 @@ public class BalanceServiceTest {
 
 
     @Test
+    @DisplayName("Account Non Existent ")
     void debitAccountNotFoundTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         double deductedAmount = 1000.0;
         Assertions.assertThrows(AccountNotFoundException.class, () -> balanceService.debit("random id", deductedAmount));
     }
     @Test
+    @DisplayName("Insufficient Balance ")
     void insufficientBalanceTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         double debitedAmount = 1000.0;
@@ -102,6 +110,7 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Account Non Existent ")
     void creditAccountNotFoundTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         double addedAmount = 1000;
@@ -109,6 +118,7 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Insufficient Balance ")
     void insufficientTransferSenderTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",49.0, "0000");
         repository.userRegistration("09617419361", "Orvyl2",150.0, "0000");
@@ -116,6 +126,7 @@ public class BalanceServiceTest {
     }
 
     @Test
+    @DisplayName("Account Non Existent ")
     void accountTransferNotFoundTest() throws  NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
         repository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         repository.userRegistration("09617419361", "Orvyl2",0.0, "0000");
