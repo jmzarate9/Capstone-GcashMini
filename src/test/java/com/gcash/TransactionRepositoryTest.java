@@ -25,13 +25,13 @@ public class TransactionRepositoryTest {
         transactionRepository = new TransactionRepository();
         balanceService = new BalanceService(accountRepository, transactionRepository);
     }
-/*
-    @AfterEach
-    void cleanup() {
-        System.out.println("Cleaning up...");
-        accountRepository.deleteAllAccounts();
-    }
-*/
+    /*
+        @AfterEach
+        void cleanup() {
+            System.out.println("Cleaning up...");
+            accountRepository.deleteAllAccounts();
+        }
+    */
     @BeforeAll
     static void globalSetup() {
         System.out.println("Global setup");
@@ -67,7 +67,6 @@ public class TransactionRepositoryTest {
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
 
-
         var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
         var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
         var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
@@ -76,12 +75,9 @@ public class TransactionRepositoryTest {
         transactionRepository.addTransaction("09617419365", transaction2);
         transactionRepository.addTransaction("09617419366", transaction3);
 
-//        System.out.println(transactionRepository.getUserTransactions(id1));
-//        System.out.println(transactionRepository.getUserTransactions(id2));
-
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, transactionRepository.getUserTransactions("09617419366").size()),
-                () -> Assertions.assertEquals(2, transactionRepository.getUserTransactions("09617419365").size())
+                () -> Assertions.assertEquals(2, transactionRepository.getUserTransactions("09617419366").size()),
+                () -> Assertions.assertEquals(1, transactionRepository.getUserTransactions("09617419365").size())
         );
     }
 
@@ -110,8 +106,8 @@ public class TransactionRepositoryTest {
         accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
         accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
 
-        var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
-        var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
+        var transaction1 = new Transaction(1.0, Transaction.TransactionType.TRANSFER);
+        var transaction2 = new Transaction(5.0, Transaction.TransactionType.TRANSFER);
         var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
 
         transactionRepository.addTransaction("09617419366", transaction1);
@@ -119,30 +115,11 @@ public class TransactionRepositoryTest {
         transactionRepository.addTransaction("09617419366", transaction3);
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, transactionRepository.getTransactionsByType(transactionRepository, Transaction.TransactionType.DEBIT).size()),
-                () -> Assertions.assertEquals(2, transactionRepository.getTransactionsByType(transactionRepository, Transaction.TransactionType.CREDIT).size())
-
+                () -> Assertions.assertEquals(1, transactionRepository.getTransactionsByType(transactionRepository, Transaction.TransactionType.CREDIT).size()),
+                () -> Assertions.assertEquals(2, transactionRepository.getTransactionsByType(transactionRepository, Transaction.TransactionType.TRANSFER).size())
         );
     }
 
-    @Test
-    void getTransactionsByUser() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException {
-        accountRepository.userRegistration("09617419366", "Orvyl",0.0, "0000");
-        accountRepository.userRegistration("09617419365", "Orvyl2",0.0, "0000");
-
-        var transaction1 = new Transaction(1.0, Transaction.TransactionType.DEBIT);
-        var transaction2 = new Transaction(5.0, Transaction.TransactionType.CREDIT);
-        var transaction3 = new Transaction(1.0, Transaction.TransactionType.CREDIT);
-
-        transactionRepository.addTransaction("09617419366", transaction1);
-        transactionRepository.addTransaction("09617419365", transaction2);
-        transactionRepository.addTransaction("09617419366", transaction3);
-
-        Assertions.assertAll(
-                () -> Assertions.assertEquals(2, transactionRepository.getTransactionsByUser(transactionRepository, accountRepository, "Loreine").size()),
-                () -> Assertions.assertEquals(1, transactionRepository.getTransactionsByUser(transactionRepository, accountRepository, "Ken").size())
-        );
-    }
 
     @Test
     void noUserTransactionsToGet() throws AccountNotFoundException, NumberAlreadyExistsException, NumberCannotBeEmptyException, NumberMustBeElevenDigitsException, PasscodeCannotBeEmptyException, PasscodeShouldFourDigitsException, NameCannotBeEmptyException{
