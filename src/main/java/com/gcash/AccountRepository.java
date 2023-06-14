@@ -50,8 +50,14 @@ public class AccountRepository {
     }
 
     // Get Account
-        //This method retrieves the account associated with the specified phone number.
+        // This method retrieves the account associated with the specified phone number.
     public Account getAccount(String phoneNumber) {
+        return accounts.get(phoneNumber);
+    }
+
+    // Search Account
+        // This method search for the user account using phoneNumber
+    public Account searchAccount(String phoneNumber) {
         return accounts.get(phoneNumber);
     }
 
@@ -81,5 +87,6 @@ public class AccountRepository {
     public void deleteAll() {
         accounts.clear();
     }
+
 
 }

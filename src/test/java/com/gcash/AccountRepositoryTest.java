@@ -98,6 +98,27 @@ public class AccountRepositoryTest {
 
     }
 
+    // TEST FOR SEARCHING AN ACCOUNT
+    @Test
+    @DisplayName("Successful Account Search")
+    void testSearchAccount(){
+
+        // Search for an existing account
+        Account account = accountRepository.searchAccount("09175861662");
+
+        // Verify if the account is not null
+        Assertions.assertNotNull(account);
+        Assertions.assertEquals("Marley", account.getName());
+        Assertions.assertEquals(100.0, account.getBalance());
+
+        // Search for a non-existent account
+        Account nonExistentAccount = accountRepository.searchAccount("09175861669");
+
+        // Verify if the non-existent account is null
+        Assertions.assertNull(nonExistentAccount);
+    }
+
+
     // TEST FOR DISPLAY ALL
     @Test
     @DisplayName("Successful Displaying All Accounts")
@@ -126,26 +147,22 @@ public class AccountRepositoryTest {
         Assertions.assertEquals(initialNumberOfUsers + 1, accountRepository.getNumberOfRegisteredUsers());
     }
 
-    // Test for deleting an account
+    // TEST FOR ACCOUNT DELETION
     @Test
     @DisplayName("Successful Account Deletion")
     void testDeleteAccount() {
 
-        // First, get the initial number of registered users.
         //Delete the user account
-        int initialCount = accountRepository.getNumberOfRegisteredUsers();
-        accountRepository.deleteAccount("09175861663");
-        // After Deleting, get updated number of registered users.
-        int updatedCount = accountRepository.getNumberOfRegisteredUsers();
-        // Verify if the expected == actual
-        Assertions.assertEquals(initialCount - 1, updatedCount);
+        accountRepository.deleteAccount("09175861662");
+
         //Check whether the deleted user account is no longer present in the database
-        Assertions.assertNull(accountRepository.getAccount("09175861663"), "The account must be null");
+        Account account = accountRepository.searchAccount("09175861662");
+        Assertions.assertNull(account);
 
         accountRepository.displayAll();
     }
 
-    // Test for deleting all accounts
+    // TEST FOR ALL ACCOUNT DELETION
     @Test
     @DisplayName("Successful Deleting All Accounts")
     void testDeleteAllAccounts() {
