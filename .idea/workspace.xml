@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30a610a4-dd6c-4f89-8e5f-ed5369974028" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gcash/newfeatures/GForest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gcash/newfeatures/GForest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/gcash/newfeatures/GForestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gcash/newfeatures/GForestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/gcash/newfeatures/GForestTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/gcash/newfeatures/GForestTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +36,22 @@
     "last_opened_file_path": "/Users/serafinwork/Desktop/Capstone-GcashMini"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.GForestTest">
+    <configuration name="GForestTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="apper-junit-zarate" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gcash.newfeatures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gcash.newfeatures" />
+      <option name="MAIN_CLASS_NAME" value="com.gcash.newfeatures.GForestTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GForestTest.plantATree" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="apper-junit-zarate" />
       <extension name="coverage">
@@ -55,8 +68,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GForestTest.updateEnergy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="apper-junit-zarate" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gcash.newfeatures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gcash.newfeatures" />
+      <option name="MAIN_CLASS_NAME" value="com.gcash.newfeatures.GForestTest" />
+      <option name="METHOD_NAME" value="updateEnergy" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.gcash in apper-junit-zarate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="apper-junit-zarate" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gcash.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gcash" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GForestTest" />
+        <item itemvalue="JUnit.GForestTest.updateEnergy" />
+        <item itemvalue="JUnit.com.gcash in apper-junit-zarate" />
         <item itemvalue="JUnit.GForestTest.plantATree" />
       </list>
     </recent_temporary>
@@ -71,5 +117,19 @@
       <updated>1686764232248</updated>
     </task>
     <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Capstone_GcashMini$com_gcash_in_apper_junit_zarate.ic" NAME="com.gcash in apper-junit-zarate Coverage Results" MODIFIED="1686764401406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gcash.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Capstone_GcashMini$GForestTest.ic" NAME="GForestTest Coverage Results" MODIFIED="1686765423999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gcash.newfeatures.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Capstone_GcashMini$GForestTest_plantATree.ic" NAME="GForestTest.plantATree Coverage Results" MODIFIED="1686764342015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gcash.newfeatures.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Capstone_GcashMini$GForestTest_updateEnergy.ic" NAME="GForestTest.updateEnergy Coverage Results" MODIFIED="1686765402820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gcash.newfeatures.*</FILTER>
+    </SUITE>
   </component>
 </project>
