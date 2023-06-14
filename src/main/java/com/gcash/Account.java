@@ -28,6 +28,9 @@ public class Account {
         return passcode;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
 
     //Setter
     public void setBalance(Double balance) {

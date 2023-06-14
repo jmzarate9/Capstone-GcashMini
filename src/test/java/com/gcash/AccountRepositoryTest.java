@@ -133,7 +133,7 @@ public class AccountRepositoryTest {
 
     // TEST FOR LOGIN ACCOUNT
     @Test
-    @DisplayName("Login")
+    @DisplayName("Successful Login")
     void testLogIn() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
             NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException,
             PasscodeShouldFourDigitsException, LoginException {
@@ -146,6 +146,28 @@ public class AccountRepositoryTest {
         // Verify if the login was successful
         Assertions.assertTrue(loggedIn);
 
+    }
+
+    // TEST FOR SIGN OUT
+    @Test
+    @DisplayName("Successful Sign Out")
+    void testSignOut() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
+            NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException,
+            PasscodeShouldFourDigitsException, LoginException {
+        // Register an account
+        accountRepository.userRegistration("09175861666", "John Doe", 100.0, "0000");
+
+        // Log in to the account
+        accountRepository.logIn("09175861666", "0000");
+
+        // Sign out from the account
+        accountRepository.signOut("09175861666");
+
+        // Retrieve the account
+        Account account = accountRepository.getAccount("09175861666");
+
+        // Verify that the account's loggedIn status is set to false after signing out
+        Assertions.assertFalse(account.isLoggedIn());
     }
 
     // TEST FOR GETTING THE ACCOUNT

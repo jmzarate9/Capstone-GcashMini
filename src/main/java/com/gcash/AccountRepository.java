@@ -64,6 +64,14 @@ public class AccountRepository {
         return true;
     }
 
+    // Sign Out
+    public void signOut(String phoneNumber) {
+        Account account = accounts.get(phoneNumber);
+        if (account != null) {
+            account.setLoggedIn(false);
+        }
+    }
+
     // Get Account
     // This method retrieves the account associated with the specified phone number.
     public Account getAccount(String phoneNumber) {
