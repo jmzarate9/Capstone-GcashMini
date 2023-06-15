@@ -1,7 +1,6 @@
 package com.gcash;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class AccountRepository {
 
@@ -55,6 +54,24 @@ public class AccountRepository {
         accounts.put(phoneNumber, account);
     }
 
+    // Login
+    public boolean logIn(String phoneNumber, String passcode) throws LoginException {
+        Account account = accounts.get(phoneNumber);
+        if (account == null || !account.getPasscode().equals(passcode)) {
+            throw new LoginException("Incorrect number or MPIN");
+        }
+        account.setLoggedIn(true);
+        return true;
+    }
+
+    // Sign Out
+    public void signOut(String phoneNumber) {
+        Account account = accounts.get(phoneNumber);
+        if (account != null) {
+            account.setLoggedIn(false);
+        }
+    }
+
     // Get Account
     // This method retrieves the account associated with the specified phone number.
     public Account getAccount(String phoneNumber) {
@@ -93,4 +110,5 @@ public class AccountRepository {
     public void deleteAll() {
         accounts.clear();
     }
+
 }

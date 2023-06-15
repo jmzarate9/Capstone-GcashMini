@@ -103,6 +103,13 @@ public class AccountRepositoryTest {
                 accountRepository.userRegistration("09175861666", "John Doe", 100.0, "12345"), "The passcode should be invalid.");
     }
 
+    //TEST FOR LOGIN ACCOUNT
+    @Test
+    @DisplayName("Successful Testing of Login Feature")
+    void testLoginDifferentNumberOrPasscode() {
+        Assertions.assertThrows(LoginException.class, () -> accountRepository.logIn("09175861661", "0000"), "The number or MPIN should be different from the initial value.");
+    }
+
     // TEST FOR RETRIEVING ACCOUNT PASSCODE
     @Test
     @DisplayName("Successful Retrieval of Passcode")
@@ -122,6 +129,45 @@ public class AccountRepositoryTest {
 
         // Verify if the retrieved passcode matches the expected value
         Assertions.assertEquals("1234", passcode);
+    }
+
+    // TEST FOR LOGIN ACCOUNT
+    @Test
+    @DisplayName("Successful Login")
+    void testLogIn() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
+            NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException,
+            PasscodeShouldFourDigitsException, LoginException {
+        // Register an account
+        accountRepository.userRegistration("09175861666", "John", 100.0, "0000");
+
+        // Log in with correct phone number and passcode
+        boolean loggedIn = accountRepository.logIn("09175861666", "0000");
+
+        // Verify if the login was successful
+        Assertions.assertTrue(loggedIn);
+
+    }
+
+    // TEST FOR SIGN OUT
+    @Test
+    @DisplayName("Successful Sign Out")
+    void testSignOut() throws NumberMustBeElevenDigitsException, NumberCannotBeEmptyException,
+            NumberAlreadyExistsException, NameCannotBeEmptyException, PasscodeCannotBeEmptyException,
+            PasscodeShouldFourDigitsException, LoginException {
+        // Register an account
+        accountRepository.userRegistration("09175861666", "John Doe", 100.0, "0000");
+
+        // Log in to the account
+        accountRepository.logIn("09175861666", "0000");
+
+        // Sign out from the account
+        accountRepository.signOut("09175861666");
+
+        // Retrieve the account
+        Account account = accountRepository.getAccount("09175861666");
+
+        // Verify that the account's loggedIn status is set to false after signing out
+        Assertions.assertFalse(account.isLoggedIn());
     }
 
     // TEST FOR GETTING THE ACCOUNT
